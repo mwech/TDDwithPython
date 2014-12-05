@@ -29,3 +29,23 @@ class Bruch():
     def __le__(self, other):
         return float(self.zaehler/self.nenner) <= float(other.zaehler/other.nenner)
 
+    def __float__(self):
+        return float(self.zaehler/self.nenner)
+
+    def __int__(self):
+        return int(self.zaehler/self.nenner)
+
+    def __str__(self):
+        if self.nenner == 1:
+            return "(%s)" % abs(self.zaehler)
+        else:
+            return "(%s/%s)" % (abs(self.zaehler), abs(self.nenner))
+
+    def __neg__(self):
+        return Bruch(self.zaehler*(-1),self.nenner)
+
+    def __abs__(self):
+        return Bruch(abs(self.zaehler),self.nenner)
+
+    def __invert__(self):
+        return Bruch(self.nenner, self.zaehler)
