@@ -125,7 +125,7 @@ class Bruch():
         elif isinstance(self, Bruch) and isinstance(other, int):
             return float(self.zaehler / self.nenner) * other
         else:
-            raise TypeError("Nur int als Summanden erlaubt!")
+            raise TypeError("Nur int als zu multiplizierender Wert erlaubt!")
 
     def __rmul__(self, other):
         return self.zaehler*other/self.nenner
@@ -136,4 +136,30 @@ class Bruch():
         elif isinstance(other, Bruch):
             return imul(self.zaehler, other.zaehler)/ self.nenner
         else:
+            raise TypeError("Nur int als Wert erlaubt!")
+
+    def __truediv__(self, other):
+        if isinstance(self, Bruch) and isinstance(other, Bruch):
+            return float(self.zaehler / self.nenner) / float(other.zaehler / other.nenner)
+        elif isinstance(self, Bruch) and isinstance(other, int):
+            return float(self.zaehler / self.nenner) / other
+        elif isinstance(self, Bruch) and other == 0:
+            raise ZeroDivisionError("Division durch 0 nicht erlaubt!")
+        else:
+            raise TypeError("Nur int als zu dividierender Wert erlaubt!")
+
+    def __rtruediv__(self, other):
+        if isinstance(other, int) and isinstance(self, Bruch):
+            return other / (self.zaehler/self.nenner)
+        if other == 0:
+            raise ZeroDivisionError("Division durch 0 nicht erlaubt!")
+        if not isinstance(other, int) and isinstance(self, Bruch):
+            raise TypeError("Nur int als  Wert erlaubt!")
+
+    def __itruediv__(self, other):
+         if isinstance(other, int):
+            return Bruch(self.zaehler, self.nenner* other)
+         elif isinstance(other, Bruch):
+            return Bruch(self.zaehler, self.nenner* other.zaehler)
+         else:
             raise TypeError("Nur int als Wert erlaubt!")
