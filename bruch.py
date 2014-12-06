@@ -102,7 +102,12 @@ class Bruch():
 
     #Unit Subtraktion
     def __sub__(self, other):
-        return float(self.zaehler / self.nenner) - float(other.zaehler/other.nenner)
+        if isinstance(self, Bruch) and isinstance(other, Bruch):
+            return float(self.zaehler / self.nenner) - float(other.zaehler / other.nenner)
+        elif isinstance(self, Bruch) and isinstance(other, int):
+            return float(self.zaehler / self.nenner) - other
+        else:
+            raise TypeError("Nur int als zu subtrahierender Wert erlaubt!")
 
     def __rsub__(self, other):
         if isinstance(other, int):
@@ -138,6 +143,7 @@ class Bruch():
         else:
             raise TypeError("Nur int als Wert erlaubt!")
 
+    #Unit Division
     def __truediv__(self, other):
         if isinstance(self, Bruch) and isinstance(other, Bruch):
             return float(self.zaehler / self.nenner) / float(other.zaehler / other.nenner)
@@ -163,3 +169,8 @@ class Bruch():
             return Bruch(self.zaehler, self.nenner* other.zaehler)
          else:
             raise TypeError("Nur int als Wert erlaubt!")
+
+    #Unit Zusatz
+    def __iter__(self):
+        yield self.zaehler
+        yield self.nenner
