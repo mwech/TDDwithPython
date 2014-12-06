@@ -99,3 +99,21 @@ class Bruch():
             return Bruch(iadd(self.zaehler, other.zaehler * self.nenner), self.nenner)
         else:
             raise TypeError("Nur int oder Bruch als Summand erlaubt!")
+
+    #Unit Subtraktion
+    def __sub__(self, other):
+        return float(self.zaehler / self.nenner) - float(other.zaehler/other.nenner)
+
+    def __rsub__(self, other):
+        if isinstance(other, int):
+            return other - self.zaehler/self.nenner
+        else:
+            raise TypeError("Nur int als Wert erlaubt!")
+
+    def __isub__(self, other):
+        if isinstance(other, int):
+            return Bruch(isub(self.zaehler, other * self.nenner), self.nenner)
+        elif isinstance(other, Bruch):
+            return Bruch(isub(self.zaehler, other.zaehler * self.nenner), self.nenner)
+        else:
+            raise TypeError("Nur int als Wert erlaubt!")
