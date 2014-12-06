@@ -38,6 +38,5 @@ class TestVergleich(unittest.TestCase):
         assert(self.b3 > self.b2)
 
 
-
 if __name__ == "__main__":
     unittest.main()

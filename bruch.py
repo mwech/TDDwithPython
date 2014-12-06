@@ -117,3 +117,23 @@ class Bruch():
             return Bruch(isub(self.zaehler, other.zaehler * self.nenner), self.nenner)
         else:
             raise TypeError("Nur int als Wert erlaubt!")
+
+    #Unit Multiplikation
+    def __mul__(self, other):
+        if isinstance(self, Bruch) and isinstance(other, Bruch):
+            return float(self.zaehler / self.nenner) * float(other.zaehler / other.nenner)
+        elif isinstance(self, Bruch) and isinstance(other, int):
+            return float(self.zaehler / self.nenner) * other
+        else:
+            raise TypeError("Nur int als Summanden erlaubt!")
+
+    def __rmul__(self, other):
+        return self.zaehler*other/self.nenner
+
+    def __imul__(self, other):
+        if isinstance(other, int):
+            return imul(self.zaehler, other)/ self.nenner
+        elif isinstance(other, Bruch):
+            return imul(self.zaehler, other.zaehler)/ self.nenner
+        else:
+            raise TypeError("Nur int als Wert erlaubt!")
