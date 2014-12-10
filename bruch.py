@@ -323,10 +323,8 @@ class Bruch():
     #Unit Zusatz
     def __iter__(self):
         """
-        Methode, um Iterator Objekte zurückzuliefern
+        Methode, um die Klasse iterabel zu machen
         :type self: object
         """
         #1.Wert --> Zähler, yield statt return
-        yield self.zaehler
-        #2.Wert --> Nenner, yield statt return
-        yield self.nenner
+        return (self.zaehler,self.nenner).__iter__()
